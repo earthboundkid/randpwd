@@ -6,3 +6,4 @@ disableKinds = [
   "taxonomy",
   "term",
 ]
+minify = true
