@@ -54,7 +54,7 @@ function rando() {
 
     alphabet: lower + upper + digits,
 
-    length: 10,
+    pwLength: 10,
 
     passwords: this.$persist([]),
     error: "",
@@ -76,7 +76,7 @@ function rando() {
         }
 
         let chars = [];
-        for (let i = 0; i < this.length; i++) {
+        for (let i = 0; i < this.pwLength; i++) {
           let choiceIdx = secureRand(0, this.alphabet.length);
           chars.push(this.alphabet[choiceIdx]);
         }
