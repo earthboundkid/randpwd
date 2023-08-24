@@ -40,6 +40,10 @@ function bigEndian(byteArray) {
   return new DataView(byteArray.buffer).getUint32();
 }
 
+function choose(a) {
+  return a[secureRand(0, a.length)]
+}
+
 function rando() {
   const lower = "abcdefghijklmnopqrstuvwxyz";
   const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -54,7 +58,7 @@ function rando() {
 
     alphabet: lower + upper + digits,
 
-    pwLength: 10,
+    pwLength: this.$persist(10),
 
     passwords: this.$persist([]),
     error: "",
@@ -77,8 +81,7 @@ function rando() {
 
         let chars = [];
         for (let i = 0; i < this.pwLength; i++) {
-          let choiceIdx = secureRand(0, this.alphabet.length);
-          chars.push(this.alphabet[choiceIdx]);
+          chars.push(choose(this.alphabet));
         }
         password = chars.join('');
       }
