@@ -102,6 +102,22 @@ function rando() {
   }
 }
 
+function copier() {
+  return {
+    copied: false,
+
+    init() {
+      this.$watch("copied", val => {
+        if (!val) return;
+        window.setTimeout(() => {
+          this.copied = false;
+        }, 5000)
+      })
+    }
+  }
+}
+
 document.addEventListener('alpine:init', () => {
   Alpine.data('rando', rando);
+  Alpine.data('copier', copier);
 });
