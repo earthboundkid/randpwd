@@ -56,11 +56,11 @@ function rando() {
 
     length: 10,
 
-    password: "",
+    passwords: this.$persist([]),
     error: "",
 
     init() {
-      this.genPass()
+      if (!this.passwords.length) this.genPass();
     },
 
     genPass() {
@@ -83,7 +83,7 @@ function rando() {
         password = chars.join('');
       }
 
-      this.password = password;
+      this.passwords.unshift(password);
     },
 
     meetsRequirements(pwd) {
@@ -92,6 +92,12 @@ function rando() {
 
     containsAny(str, chars) {
       return Array.from(str).some(c => chars.includes(c));
+    },
+
+    async copy(pwd) {
+      await window.navigator.clipboard.writeText(pwd).catch(e => {
+        this.error = e.message;
+      });
     }
   }
 }

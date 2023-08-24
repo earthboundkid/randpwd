@@ -6,7 +6,15 @@
   <div class="flex min-h-screen items-center justify-center" x-data="rando">
     <div class="flex flex-col p-2 bg-red-50 text-red-900 max-w-lg w-full h-96 rounded shadow">
       <span>
-        Password: <span x-text="password"></span>
+        Passwords:
+        <ul>
+          <template x-for="password, i of passwords">
+            <li>
+              <span x-text="password" @click="copy(password)" class="select-all"></span>
+              <button type="button" @click="passwords.splice(i, 1)">X</button>
+            </li>
+          </template>
+        </ul>
       </span>
 
       <button
