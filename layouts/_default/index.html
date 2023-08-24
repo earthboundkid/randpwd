@@ -27,6 +27,13 @@
             </li>
           </template>
         </ul>
+        <button
+          @click="window.confirm('Erase all passwords?') && (passwords = []);"
+          type="button"
+          class="mt-auto rounded px-3 py-2 bg-pink-600 text-pink-200 hover:bg-pink-700 transition font-semibold"
+        >
+          Clear all
+        </button>
       </div>
     </div>
 
