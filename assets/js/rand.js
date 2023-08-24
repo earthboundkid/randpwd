@@ -1,3 +1,23 @@
+const effLongList = document
+  .querySelector("#eff-long")
+  .textContent.split("\n")
+  .filter(Boolean);
+
+const effShortList = document
+  .querySelector("#eff-short")
+  .textContent.split("\n")
+  .filter(Boolean);
+
+const effPrefixList = document
+  .querySelector("#eff-prefix")
+  .textContent.split("\n")
+  .filter(Boolean);
+
+const voaList = document
+  .querySelector("#voa")
+  .textContent.split("\n")
+  .filter(Boolean);
+
 function secureRand(min, max) {
   let range = max - min;
   if (range < 2) {
@@ -54,6 +74,8 @@ function rando() {
     reqLower: this.$persist(true),
     reqDigits: this.$persist(true),
     reqSymbols: this.$persist([]),
+    wordCount: this.$persist(4),
+    wordList: this.$persist("long"),
 
     get requirements() {
       let reqs = [];
@@ -117,6 +139,21 @@ function rando() {
       await window.navigator.clipboard.writeText(pwd).catch((e) => {
         this.error = e.message;
       });
+    },
+
+    genWord() {
+      let dict = {
+        long: effLongList,
+        short: effShortList,
+        prefix: effPrefixList,
+        voa: voaList,
+      }[this.wordList];
+
+      let words = [];
+      for (let i = 0; i < this.wordCount; i++) {
+        words.push(choose(dict));
+      }
+      this.passwords.unshift(words.join("-"));
     },
   };
 }

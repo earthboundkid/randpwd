@@ -3,8 +3,8 @@
 {{ end }}
 
 {{ define "main" }}
-  <div
-    class="flex min-h-[100svh] flex-wrap items-center justify-center gap-8"
+  <main
+    class="flex min-h-[100svh] flex-wrap items-center justify-center gap-x-8 gap-y-6"
     x-data="rando"
   >
     <div
@@ -90,7 +90,7 @@
     <div
       class="flex h-96 min-h-fit w-full max-w-sm flex-col gap-6 rounded border border-rose-200 bg-red-50 p-2 text-red-900 shadow"
     >
-      <p class="font-semibold">Rules</p>
+      <p class="font-semibold">Simple rules</p>
       <div class="flex flex-col gap-2 px-2">
         <label class="flex h-10 items-center justify-between">
           <span> Length </span>
@@ -134,5 +134,54 @@
         New simple password
       </button>
     </div>
-  </div>
+
+    <div
+      class="flex h-96 min-h-fit w-full max-w-sm flex-col gap-6 rounded border border-rose-200 bg-red-50 p-2 text-red-900 shadow"
+    >
+      <p class="font-semibold">Random words</p>
+      <div class="flex flex-col gap-2 px-2">
+        <label class="flex h-10 items-center justify-between">
+          <span> Number of words </span>
+          <input
+            x-model.numeric="wordCount"
+            type="number"
+            class="border-grey-500 w-16 rounded border px-2 py-1 outline-pink-200 focus:outline"
+          />
+        </label>
+        <label class="flex h-10 items-center justify-between">
+          <span> Word list </span>
+          <select
+            class="text-grey-600 border-grey-400 block w-48 appearance-none rounded border bg-white px-2 py-2 font-sans outline-pink-200 focus:outline"
+            x-model="wordList"
+          >
+            <option value="long">EFF long word list (7,776 words)</option>
+            <option value="short">EFF short word list (1,296 words)</option>
+            <option value="prefix">
+              EFF unique prefix word list (1,296 words)
+            </option>
+            <option value="voa">
+              Voice of America word list (1,509 words)
+            </option>
+          </select>
+        </label>
+      </div>
+
+      <button
+        @click="genWord()"
+        type="button"
+        class="mt-auto rounded bg-pink-600 px-3 py-2 font-semibold text-pink-200 transition hover:bg-pink-700"
+      >
+        New random words
+      </button>
+    </div>
+  </main>
+{{ end }}
+
+{{ define "footer" }}
+  {{ range (slice "eff-long" "eff-prefix" "eff-short" "voa") }}
+    {{ $csv := resources.Get (printf "words/%s.txt" .) }}
+    <script type="text/csv" id="{{ . }}">
+      {{- $csv.Content -}}
+    </script>
+  {{ end }}
 {{ end }}
