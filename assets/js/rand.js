@@ -41,7 +41,7 @@ function bigEndian(byteArray) {
 }
 
 function choose(a) {
-  return a[secureRand(0, a.length)]
+  return a[secureRand(0, a.length)];
 }
 
 function rando() {
@@ -50,11 +50,7 @@ function rando() {
   const digits = "1234567890";
 
   return {
-    requirements: [
-      lower,
-      upper,
-      digits,
-    ],
+    requirements: [lower, upper, digits],
 
     alphabet: lower + upper + digits,
 
@@ -83,26 +79,26 @@ function rando() {
         for (let i = 0; i < this.pwLength; i++) {
           chars.push(choose(this.alphabet));
         }
-        password = chars.join('');
+        password = chars.join("");
       }
 
       this.passwords.unshift(password);
     },
 
     meetsRequirements(pwd) {
-      return this.requirements.every(req => this.containsAny(pwd, req))
+      return this.requirements.every((req) => this.containsAny(pwd, req));
     },
 
     containsAny(str, chars) {
-      return Array.from(str).some(c => chars.includes(c));
+      return Array.from(str).some((c) => chars.includes(c));
     },
 
     async copy(pwd) {
-      await window.navigator.clipboard.writeText(pwd).catch(e => {
+      await window.navigator.clipboard.writeText(pwd).catch((e) => {
         this.error = e.message;
       });
-    }
-  }
+    },
+  };
 }
 
 function copier() {
@@ -110,17 +106,17 @@ function copier() {
     copied: false,
 
     init() {
-      this.$watch("copied", val => {
+      this.$watch("copied", (val) => {
         if (!val) return;
         window.setTimeout(() => {
           this.copied = false;
-        }, 5000)
-      })
-    }
-  }
+        }, 5000);
+      });
+    },
+  };
 }
 
-document.addEventListener('alpine:init', () => {
-  Alpine.data('rando', rando);
-  Alpine.data('copier', copier);
+document.addEventListener("alpine:init", () => {
+  Alpine.data("rando", rando);
+  Alpine.data("copier", copier);
 });
