@@ -1,0 +1,8 @@
+baseURL = 'https://randpass.netlify.app/'
+languageCode = 'en-us'
+title = 'Random Passwords'
+disableKinds = [
+  "section",
+  "taxonomy",
+  "term",
+]
