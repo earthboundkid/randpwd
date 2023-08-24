@@ -1,4 +1,4 @@
-baseURL = 'https://randpass.netlify.app/'
+baseURL = 'https://randpwd.netlify.app/'
 languageCode = 'en-us'
 title = 'Random Passwords'
 disableKinds = [
