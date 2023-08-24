@@ -50,9 +50,28 @@ function rando() {
   const digits = "1234567890";
 
   return {
-    requirements: [lower, upper, digits],
+    reqUpper: this.$persist(true),
+    reqLower: this.$persist(true),
+    reqDigits: this.$persist(true),
+    reqSymbols: this.$persist([]),
 
-    alphabet: lower + upper + digits,
+    get requirements() {
+      let reqs = [];
+      if (this.reqUpper) {
+        reqs.push(upper);
+      }
+      if (this.reqLower) {
+        reqs.push(lower);
+      }
+      if (this.reqDigits) {
+        reqs.push(digits);
+      }
+      return [...reqs, ...this.reqSymbols];
+    },
+
+    get alphabet() {
+      return Array.from(new Set(this.requirements.join(""))).join("");
+    },
 
     pwLength: this.$persist(10),
 
@@ -64,6 +83,7 @@ function rando() {
     },
 
     genPass() {
+      console.log("here");
       let password = "";
 
       const maxTime = 100; // 100ms
