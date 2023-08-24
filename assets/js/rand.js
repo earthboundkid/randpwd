@@ -73,7 +73,8 @@ function rando() {
     reqUpper: this.$persist(true),
     reqLower: this.$persist(true),
     reqDigits: this.$persist(true),
-    reqSymbols: this.$persist([]),
+    reqSymbols: this.$persist(""),
+
     wordCount: this.$persist(4),
     wordList: this.$persist("long"),
 
@@ -88,7 +89,10 @@ function rando() {
       if (this.reqDigits) {
         reqs.push(digits);
       }
-      return [...reqs, ...this.reqSymbols];
+      if (this.reqSymbols) {
+        reqs.push(this.reqSymbols);
+      }
+      return reqs;
     },
 
     get alphabet() {
@@ -105,7 +109,6 @@ function rando() {
     },
 
     genPass() {
-      console.log("here");
       let password = "";
 
       const maxTime = 100; // 100ms
