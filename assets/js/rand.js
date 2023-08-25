@@ -1,3 +1,6 @@
+import Alpine from "alpinejs";
+import persist from "@alpinejs/persist";
+
 const effLongList = document
   .querySelector("#eff-long")
   .textContent.split("\n")
@@ -202,7 +205,9 @@ function copier() {
   };
 }
 
-document.addEventListener("alpine:init", () => {
-  Alpine.data("rando", rando);
-  Alpine.data("copier", copier);
-});
+Alpine.plugin(persist);
+
+Alpine.data("rando", rando);
+Alpine.data("copier", copier);
+
+Alpine.start();
