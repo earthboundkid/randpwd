@@ -108,7 +108,7 @@ function rando() {
       if (!this.passwords.length) this.genPass();
     },
 
-    genPass() {
+    genSimple() {
       let password = "";
 
       const maxTime = 100; // 100ms
@@ -128,6 +128,10 @@ function rando() {
       }
 
       this.passwords.unshift(password);
+      this.$refs.passwords.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     },
 
     meetsRequirements(pwd) {
@@ -157,6 +161,10 @@ function rando() {
         words.push(choose(dict));
       }
       this.passwords.unshift(words.join("-"));
+      this.$refs.passwords.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     },
   };
 }
