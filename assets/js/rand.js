@@ -105,7 +105,7 @@ function rando() {
     error: "",
 
     init() {
-      if (!this.passwords.length) this.genPass();
+      if (!this.passwords.length) this.genSimple();
     },
 
     genSimple() {
