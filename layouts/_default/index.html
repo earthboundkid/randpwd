@@ -102,10 +102,11 @@
           <label class="flex h-10 items-center justify-between">
             <span> Length </span>
             <input
-              x-model.numeric="pwLength"
-              min="1"
-              type="number"
               class="border-grey-500 w-24 rounded border px-2 py-1 outline-pink-200 focus:outline"
+              x-model.numeric="pwLength"
+              type="number"
+              inputmode="numeric"
+              min="1"
             />
           </label>
           <label class="flex h-10 cursor-pointer items-center justify-between">
@@ -167,10 +168,11 @@
           <label class="flex h-10 items-center justify-between">
             <span> Number of words </span>
             <input
-              x-model.numeric="wordCount"
-              min="1"
-              type="number"
               class="border-grey-500 w-24 rounded border px-2 py-1 outline-pink-200 focus:outline"
+              x-model.numeric="wordCount"
+              type="number"
+              inputmode="numeric"
+              min="1"
             />
           </label>
           <label class="flex flex-col gap-1">
