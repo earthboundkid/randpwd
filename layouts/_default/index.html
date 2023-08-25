@@ -77,7 +77,7 @@
           </template>
         </ul>
       </div>
-      <div x-text="error" x-show="error" class="italic"></div>
+      <div x-text="error" x-show="error" class="italic text-pink-500"></div>
       <button
         @click="window.confirm('Erase all passwords?') && (passwords = []);"
         type="button"
@@ -90,12 +90,19 @@
     <div
       class="flex h-96 min-h-fit w-full max-w-sm flex-col gap-6 rounded border border-rose-200 bg-red-50 p-2 text-red-900 shadow"
     >
-      <p class="font-semibold">Simple rules</p>
+      <div class="flex justify-between">
+        <p class="font-semibold">Simple rules</p>
+        <p class="text-pink-800">
+          Entropy:
+          <span class="" x-text="simpleEntropy"></span>
+        </p>
+      </div>
       <div class="flex flex-col gap-2 px-2">
         <label class="flex h-10 items-center justify-between">
           <span> Length </span>
           <input
             x-model.numeric="pwLength"
+            min="1"
             type="number"
             class="border-grey-500 w-16 rounded border px-2 py-1 outline-pink-200 focus:outline"
           />
@@ -147,12 +154,20 @@
     <div
       class="flex h-96 min-h-fit w-full max-w-sm flex-col gap-6 rounded border border-rose-200 bg-red-50 p-2 text-red-900 shadow"
     >
-      <p class="font-semibold">Random words</p>
+      <div class="flex justify-between">
+        <p class="font-semibold">Random words</p>
+        <p class="text-pink-800">
+          Entropy:
+          <span class="" x-text="wordEntropy"></span>
+        </p>
+      </div>
+
       <div class="flex flex-col gap-2 px-2">
         <label class="flex h-10 items-center justify-between">
           <span> Number of words </span>
           <input
             x-model.numeric="wordCount"
+            min="1"
             type="number"
             class="border-grey-500 w-16 rounded border px-2 py-1 outline-pink-200 focus:outline"
           />

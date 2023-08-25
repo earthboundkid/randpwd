@@ -110,7 +110,12 @@ function rando() {
 
     genSimple() {
       let password = "";
+      if (!this.alphabet.length) {
+        this.error = "No password requirements set.";
+        return;
+      }
 
+      this.error = "";
       const maxTime = 100; // 100ms
       let start = window.performance.now();
 
@@ -138,6 +143,13 @@ function rando() {
       return this.requirements.every((req) => this.containsAny(pwd, req));
     },
 
+    get simpleEntropy() {
+      if (!this.alphabet.length) {
+        return 0;
+      }
+      return Math.floor(Math.log2(this.alphabet.length) * this.pwLength);
+    },
+
     containsAny(str, chars) {
       return Array.from(str).some((c) => chars.includes(c));
     },
@@ -148,23 +160,29 @@ function rando() {
       });
     },
 
-    genWord() {
-      let dict = {
+    get dict() {
+      return {
         long: effLongList,
         short: effShortList,
         prefix: effPrefixList,
         voa: voaList,
       }[this.wordList];
+    },
 
+    genWord() {
       let words = [];
       for (let i = 0; i < this.wordCount; i++) {
-        words.push(choose(dict));
+        words.push(choose(this.dict));
       }
       this.passwords.unshift(words.join("-"));
       this.$refs.passwords.scrollIntoView({
         behavior: "smooth",
         block: "center",
       });
+    },
+
+    get wordEntropy() {
+      return Math.floor(Math.log2(this.dict.length) * this.wordCount);
     },
   };
 }
