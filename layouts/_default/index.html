@@ -189,6 +189,7 @@
             <option value="voa">
               Voice of America word list (1,509 words)
             </option>
+            <option value="niceware">Niceware word list (65,536 words)</option>
           </select>
         </label>
       </div>
@@ -205,7 +206,7 @@
 {{ end }}
 
 {{ define "footer" }}
-  {{ range (slice "eff-long" "eff-prefix" "eff-short" "voa") }}
+  {{ range (slice "eff-long" "eff-prefix" "eff-short" "voa" "niceware") }}
     {{ $csv := resources.Get (printf "words/%s.txt" .) }}
     <script type="text/csv" id="{{ . }}">
       {{- $csv.Content -}}

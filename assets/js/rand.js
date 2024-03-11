@@ -21,6 +21,11 @@ const voaList = document
   .textContent.split("\n")
   .filter(Boolean);
 
+const nicewareList = document
+  .querySelector("#niceware")
+  .textContent.split("\n")
+  .filter(Boolean);
+
 function secureRand(min, max) {
   let range = max - min;
   if (range < 2) {
@@ -169,6 +174,7 @@ function rando() {
         short: effShortList,
         prefix: effPrefixList,
         voa: voaList,
+        niceware: nicewareList,
       }[this.wordList];
     },
 
